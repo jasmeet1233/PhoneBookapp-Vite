@@ -3,11 +3,19 @@ import axios from "axios";
 import FilterBox from "../Components/FilterBox";
 import Form from "../Components/Form";
 import Persons from "../Components/Persons";
+import Notification from "../Components/Notification";
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("add name");
   const [newNumber, setNewNumber] = useState("add number");
+  const [notificationMessage, setNotificationMessage] = useState('');
+
+  const messageDisplayer = (message) => {
+    setNotificationMessage(message)
+    setTimeout(() => setNotificationMessage(''), 3500)
+  }
 
   useEffect(() => {
     axios
@@ -34,7 +42,7 @@ const App = () => {
     });
 
     if (NameExists) {
-      alert(
+      messageDisplayer(
         `${newName} with number ${newNumber} already exists in the Phonebook`
       );
     } else if (changeNumber) {
@@ -54,6 +62,7 @@ const App = () => {
             );
             setNewName("");
             setNewNumber("");
+            messageDisplayer(`${updatedObj.name}'s number has been updated`)
           });
       }
     } else {
@@ -63,6 +72,7 @@ const App = () => {
         .then((response) => {
           setPersons(persons.concat(response.data));
         });
+      messageDisplayer(`new number added`)
     }
   };
 
@@ -88,6 +98,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <FilterBox searchHandler={searchHandler} />
+      <Notification message = {notificationMessage}/>
       <h2>Add a Number</h2>
       <Form
         noteSubmitHandler={noteSubmitHandler}

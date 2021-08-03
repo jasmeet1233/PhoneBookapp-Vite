@@ -1,9 +1,14 @@
+2.15 - 2.18
 first data was rendered from db.json using axios
 then a delete button is added, where the event handler, delete the number by sending http delete request to that url and then we update the state to reflect the changes and use filter, and filter out the deleted stuff using condition based on id
 then we let user update the number of a name which is already there,
 so i refactor the code for cleaniness,
 nameExists is for to check if the name and no, is already there to alert the user,
 then i add ifelse, if the user wants to update the data, so i made changenumber which will check if the person is same and numebr has changed and returns the object, 
-so if the variba;e nameExits, changeNumber jave objects then its true, so we execte the if-ifelse statements in the following way.
+so if the varibale nameExits, changeNumber have objects then its true, so we execte the if-ifelse statements in the following way.
 then update is sent using put, and then we update the state, in which map is used, which has conditioned return. (id based)
 then i clear the input-boxes.
+
+2.19-2.20
+here we want to display message on screen insted of alerting,
+so i used a usestate and made a function messageDisplayer, which when run; updates the message state, and to display the message i created a notification component which displays the message.
